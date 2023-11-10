@@ -1,5 +1,21 @@
 gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 
+gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
+
+util.no_globals()
+
+local on = false
+
+util.data_mapper{
+    state = function(state)
+        on = state == '1'
+    end,
+}
+
+function node.render()
+    gl.clear(0, 1, 0, 1) -- green    
+end
+
 local json = require "json"
 
 local shaders = {
