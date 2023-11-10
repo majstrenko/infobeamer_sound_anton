@@ -27,7 +27,7 @@
         "name": "pin_19",
         "type": "integer",
         "default": 19
-    }]
+    },
      {
         "title": "Switch time",
         "ui_width": 4,
