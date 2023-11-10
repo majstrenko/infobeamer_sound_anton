@@ -22,6 +22,7 @@ def handle_pin_16():
         print("pin 16 touched")
         for pin_16, state in device.gpio.poll_forever():
             node.send('/state:%d' % state)
+            time.sleep(20)
             sixteen_is_on = False
         
 
