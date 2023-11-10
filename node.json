@@ -122,4 +122,5 @@
             "hint": "How long should this item be displayed on screen. For videos, use their duration",
             "default": 5
         }]
+    }]
 }
