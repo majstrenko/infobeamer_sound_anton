@@ -7,6 +7,7 @@ local video = resource.load_video{
     file = "video.mp4";
     looped = false;
     audio = true;
+    raw = true;
 }
 
 util.data_mapper{
