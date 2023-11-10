@@ -1,7 +1,0 @@
-{
-    "name": "GPIO relay Adafruit Sound",
-    "author": "Samuel Chovanec",
-    "desc": "GPIO relay control that turns pin 26 OFF",
-    "repository": "https://github.com/samuelchovanec/GPIO_relay_controll_OFF",
-    "platforms": ["pi/epoch-1", "pi/epoch-2"]
-}
