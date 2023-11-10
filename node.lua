@@ -11,9 +11,12 @@ util.data_mapper{
 }
 
 function node.render()
-    gl.clear(0, 1, 0, 1) -- green    
+    if on then
+        gl.clear(0, 1, 0, 1) -- green
+    else
+        gl.clear(1, 0, 0, 1) -- red
+    end
 end
-
 local json = require "json"
 
 local shaders = {
