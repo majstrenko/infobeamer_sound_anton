@@ -4,9 +4,9 @@ config.restart_on_update()
 
 
 device.gpio.monitor(config.pin_16)
-device.gpio.monitor(config.pin_17)
-device.gpio.monitor(config.pin_18)
-device.gpio.monitor(config.pin_19)
+#device.gpio.monitor(config.pin_17)
+#device.gpio.monitor(config.pin_18)
+#device.gpio.monitor(config.pin_19)
 
 
 sixteen_is_on = False
