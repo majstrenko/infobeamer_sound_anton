@@ -1,30 +1,27 @@
-gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
+local video -- this will hold our video resource
 
-util.no_globals()
-
-local video = resource.load_video{
-    file = "1.mp4",
-    looped = false,
-    audio = true,
-    paused = true
-}
-
-util.data_mapper{
-    ["state/16"] = function(state)
-        if state == 'restart' then
-            video:stop() -- Stop the video if it's playing
-            video:start() -- Start the video from the beginning
-            print("Restarting video for pin 16")
-        end
-    end
-    -- Add similar handlers for other pins if needed
-}
+function setup()
+    video = resource.load_video{
+        file = "1.mp4",
+        looped = false,
+        paused = true,
+    }
+end
 
 function node.render()
-    local video_state, w, h = video:state()
-    if video_state ~= "finished" then
-        video:draw(0, 0, WIDTH, HEIGHT)
-    else
-        gl.clear(1, 0, 0, 1) -- red, default state
-    end
+    gl.clear(0, 0, 0, 1) -- clear the screen
+    video:draw(0, 0, WIDTH, HEIGHT) -- draw the video
 end
+
+node.event("data", function(data, suffix)
+    if data == "touch" then
+        if video:state() == "paused" then
+            video:start()
+        elseif video:state() == "finished" then
+            video:rewind()
+            video:start()
+        end
+    end
+end)
+
+setup()
