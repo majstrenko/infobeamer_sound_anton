@@ -8,12 +8,12 @@ local on = false
 
 function load_videos()
     video1 = resource.load_video{
-        file = "path/to/your/first/video.mp4",
+        file = "1.mp4",
         looped = true,
         paused = true,
     }
     video2 = resource.load_video{
-        file = "path/to/your/second/video.mp4",
+        file = "2.mp4",
         looped = true,
         paused = true,
     }
