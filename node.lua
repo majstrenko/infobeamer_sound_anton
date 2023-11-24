@@ -3,7 +3,7 @@ gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 util.no_globals()
 
 local video = resource.load_video{
-    file = "1.mp4",
+    file = "video1.mp4",
     looped = false,
     audio = true,
     paused = true
@@ -13,11 +13,14 @@ local video_playing = false
 
 util.data_mapper{
     ["state/16"] = function(state)
-        if state == 'toggle' then
+        if state == '1' then
             video:stop() -- Stop the video if it's playing
             video:start() -- Start the video from the beginning
             video_playing = true
-            print("Toggling video for pin 16")
+            print("Starting video for pin 16")
+        elseif state == '0' then
+            video_playing = false
+            print("Resetting state for pin 16")
         end
     end
     -- Add similar handlers for other pins if needed
