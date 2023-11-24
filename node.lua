@@ -19,7 +19,7 @@ util.data_mapper{
             current_video:start()
             video_playing = true
             if state == '0' then
-                current_video:stop()
+                current_video:dispose()
                 video_playing = false
             end
         end
