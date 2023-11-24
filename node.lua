@@ -12,47 +12,59 @@ local videos = {
 local current_video = nil
 local video_playing = false
 
+local function start_video(pin)
+    if current_video then
+        current_video:stop()
+    end
+    current_video = videos[pin]
+    current_video:start()
+    video_playing = true
+end
+
+local function stop_video()
+    if current_video then
+        current_video:stop()
+    end
+    current_video = nil
+    video_playing = false
+end
+
 util.data_mapper{
     ["state/16"] = function(state)
         if state == '1' then
-            current_video = videos[16]
-            current_video:start()
-            video_playing = true
-            if state == '0' then
-                current_video:dispose()
-                video_playing = false
-            end
+            start_video(16)
+        elseif state == '0' then
+            stop_video()
         end
     end,
     ["state/17"] = function(state)
         if state == '1' then
-            current_video = videos[17]
-            current_video:start()
-            video_playing = true
+            start_video(17)
+        elseif state == '0' then
+            stop_video()
         end
     end,
     ["state/18"] = function(state)
         if state == '1' then
-            current_video = videos[18]
-            current_video:start()
-            video_playing = true
+            start_video(18)
+        elseif state == '0' then
+            stop_video()
         end
     end,
     ["state/19"] = function(state)
         if state == '1' then
-            current_video = videos[19]
-            current_video:start()
-            video_playing = true
+            start_video(19)
+        elseif state == '0' then
+            stop_video()
         end
     end,
 }
 
 function node.render()
     if video_playing and current_video then
-        local state, w, h = current_video:state()
-        if state == "finished" then
-            video_playing = false
-            current_video = nil
+        local video_state, w, h = current_video:state()
+        if video_state == "finished" then
+            stop_video()
             gl.clear(1, 0, 0, 1) -- red, default state
         else
             current_video:draw(0, 0, WIDTH, HEIGHT)
