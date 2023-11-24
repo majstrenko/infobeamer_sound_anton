@@ -12,16 +12,15 @@ local video = resource.load_video{
 local video_playing = false
 
 util.data_mapper{
-    ["state"] = function(state)
-        if state == '1' then
-            if video_playing then
-                video:stop() -- Stop the video if it's already playing
-            end
+    ["state/16"] = function(state)
+        if state == 'toggle' then
+            video:stop() -- Stop the video if it's playing
             video:start() -- Start the video from the beginning
             video_playing = true
-            print("Starting video")
+            print("Toggling video for pin 16")
         end
     end
+    -- Add similar handlers for other pins if needed
 }
 
 function node.render()
