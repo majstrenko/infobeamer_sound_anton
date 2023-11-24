@@ -1,22 +1,18 @@
-#!/usr/bin/python2.7
-from hosted import device, node, config, time, threading
-config.restart_on_update()
+import threading
 
-device.gpio.monitor(config.pin_16)
-device.gpio.monitor(config.pin_17)
-device.gpio.monitor(config.pin_18)
-device.gpio.monitor(config.pin_19)
-
-def handle_pin(pin, state):
-    if state == 1:
-        print("pin {} touched".format(pin))
-        node.send('/state/%d:1' % pin)
-        time.sleep(20)  # Adjust the sleep time as needed
+def handle_pin_16(state):
+    global sixteen_is_on
+    if not sixteen_is_on and state == 1:  # Assuming state 1 means active
+        sixteen_is_on = True
+        print("pin 16 touched")
+        # Handle the event here
+        node.send('/state:%d' % state)
+        sixteen_is_on = False
 
 def gpio_poll_loop():
-    for pin, state in device.gpio.poll_forever():
-        if pin in [16, 17, 18, 19]:
-            threading.Thread(target=handle_pin, args=(pin, state)).start()
+    for pin_16, state in device.gpio.poll_forever():
+        if pin_16 == 16:  # Assuming you're interested in pin 16
+            handle_pin_16(state)
 
 # Start the GPIO polling loop in a separate thread
 gpio_poll_thread = threading.Thread(target=gpio_poll_loop)
