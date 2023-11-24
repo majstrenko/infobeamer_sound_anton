@@ -18,6 +18,7 @@ def handle_pin_16(state):
         sixteen_is_on = True
         print("pin 16 touched")
         node.send('/state:%d' % state)
+        time.sleep(20)
         sixteen_is_on = False
 
 def handle_pin_17(state):
