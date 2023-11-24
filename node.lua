@@ -3,66 +3,45 @@ gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 util.no_globals()
 
 local videos = {
-    [16] = resource.load_video{file = "1.mp4", looped = false, audio = true, paused = true},
-    [17] = resource.load_video{file = "2.mp4", looped = false, audio = true, paused = true},
-    [18] = resource.load_video{file = "3.mp4", looped = false, audio = true, paused = true},
-    [19] = resource.load_video{file = "4.mp4", looped = false, audio = true, paused = true},
+    [16] = resource.load_video{file = "video_for_pin_16.mp4", looped = false, audio = true, paused = true},
+    [17] = resource.load_video{file = "video_for_pin_17.mp4", looped = false, audio = true, paused = true},
+    [18] = resource.load_video{file = "video_for_pin_18.mp4", looped = false, audio = true, paused = true},
+    [19] = resource.load_video{file = "video_for_pin_19.mp4", looped = false, audio = true, paused = true},
 }
 
 local current_video = nil
 local video_playing = false
 
+function start_video(pin)
+    if current_video then
+        current_video:stop()
+        print("Stopping current video")
+    end
+    current_video = videos[pin]
+    current_video:start()
+    video_playing = true
+    print("Starting video for pin " .. pin)
+end
+
 util.data_mapper{
     ["state/16"] = function(state)
-        print("Received state for pin 16: " .. state)
         if state == '1' then
-            if current_video then
-                current_video:stop()
-                print("Stopping current video")
-            end
-            current_video = videos[16]
-            current_video:start()
-            video_playing = true
-            print("Starting video for pin 16")
+            start_video(16)
         end
     end,
     ["state/17"] = function(state)
-        print("Received state for pin 17: " .. state)
         if state == '1' then
-            if current_video then
-                current_video:stop()
-                print("Stopping current video")
-            end
-            current_video = videos[17]
-            current_video:start()
-            video_playing = true
-            print("Starting video for pin 17")
+            start_video(17)
         end
     end,
     ["state/18"] = function(state)
-        print("Received state for pin 18: " .. state)
         if state == '1' then
-            if current_video then
-                current_video:stop()
-                print("Stopping current video")
-            end
-            current_video = videos[18]
-            current_video:start()
-            video_playing = true
-            print("Starting video for pin 18")
+            start_video(18)
         end
     end,
     ["state/19"] = function(state)
-        print("Received state for pin 19: " .. state)
         if state == '1' then
-            if current_video then
-                current_video:stop()
-                print("Stopping current video")
-            end
-            current_video = videos[19]
-            current_video:start()
-            video_playing = true
-            print("Starting video for pin 19")
+            start_video(19)
         end
     end,
 }
