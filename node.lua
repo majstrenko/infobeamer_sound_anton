@@ -12,36 +12,53 @@ local videos = {
 local current_video = nil
 local video_playing = false
 
-function start_video(pin)
-    if current_video then
-        current_video:stop()
-        print("Stopping current video")
-    end
-    current_video = videos[pin]
-    current_video:start()
-    video_playing = true
-    print("Starting video for pin " .. pin)
-end
-
 util.data_mapper{
     ["state/16"] = function(state)
         if state == '1' then
-            start_video(16)
+            if current_video then
+                current_video:stop()
+                print("Stopping current video")
+            end
+            current_video = videos[16]
+            current_video:start()
+            video_playing = true
+            print("Starting video for pin 16")
         end
     end,
     ["state/17"] = function(state)
         if state == '1' then
-            start_video(17)
+            if current_video then
+                current_video:stop()
+                print("Stopping current video")
+            end
+            current_video = videos[17]
+            current_video:start()
+            video_playing = true
+            print("Starting video for pin 17")
         end
     end,
     ["state/18"] = function(state)
         if state == '1' then
-            start_video(18)
+            if current_video then
+                current_video:stop()
+                print("Stopping current video")
+            end
+            current_video = videos[18]
+            current_video:start()
+            video_playing = true
+            print("Starting video for pin 18")
         end
     end,
     ["state/19"] = function(state)
         if state == '1' then
-            start_video(19)
+            if current_video then
+                current_video:stop()
+                print("Stopping current video")
+            end
+            current_video = videos[19]
+            current_video:start()
+            video_playing = true
+            print("Starting video for pin 19")
         end
     end,
 }
@@ -52,10 +69,7 @@ function node.render()
         if state == "finished" then
             print("Video finished playing")
             video_playing = false
-            -- Reset the video to allow replaying
-            current_video:stop()
-            current_video:start()
-            current_video:pause()
+            current_video:dispose() -- Dispose of the current video
             current_video = nil
             gl.clear(1, 0, 0, 1) -- red, default state
         else
