@@ -13,7 +13,7 @@ local current_video = nil
 local video_playing = false
 
 util.data_mapper{
-    ["state/16"] = function(state)
+    ["state/16:1"] = function(state)
         if state == '1' then
             current_video = videos[16]
             current_video:start()
