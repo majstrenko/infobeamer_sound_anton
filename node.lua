@@ -4,7 +4,7 @@ util.no_globals()
 
 local video = resource.load_video{
     file = "1.mp4",
-    looped = false,
+    looped = true,
     audio = true,
     paused = true
 }
