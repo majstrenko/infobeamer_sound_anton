@@ -18,6 +18,9 @@ util.data_mapper{
             current_video = videos[16]
             current_video:start()
             video_playing = true
+            wait( 5000 )
+            current_video:stop()
+            video_playing = false
         end
     end,
     ["state/17"] = function(state)
