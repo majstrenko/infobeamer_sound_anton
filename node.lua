@@ -2,46 +2,42 @@ gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 
 util.no_globals()
 
-local video = resource.load_video{
-    file = "1.mp4",
-    looped = false,
-    audio = true,
-    paused = true
-}
+local video1 -- Video to be played when 'on' is true
+local video2 -- Video to be played when 'on' is false
+local on = false
 
-local video_playing = false
+function load_videos()
+    video1 = resource.load_video{
+        file = "path/to/your/first/video.mp4",
+        looped = true,
+        paused = true,
+    }
+    video2 = resource.load_video{
+        file = "path/to/your/second/video.mp4",
+        looped = true,
+        paused = true,
+    }
+end
 
 util.data_mapper{
-    ["state/16"] = function(state)
-        if state == 'toggle' then
-            if not video_playing then
-                video:start() -- Start the video from the beginning
-                video_playing = true
-                print("Starting video for pin 16")
-            end
-        end
-    end,
-    ["state/16"] = function(state)
-        if state == 'toggleoff' then
-            if not video_playing then
-                video:stop() -- Start the video from the beginning
-                video_playing = false
-                print("Starting video for pin 16")
-            end
+    state = function(state)
+        on = state == '1'
+        if on then
+            video1:start()
+            video2:stop()
+        else
+            video1:stop()
+            video2:start()
         end
     end,
 }
 
 function node.render()
-    if video_playing then
-        local state, w, h = video:state()
-        if state == "finished" then
-            video_playing = false
-            video:stop()
-            print("Video finished playing")
-        else
-            video:draw(0, 0, WIDTH, HEIGHT)
-        end
+    if on then
+        video1:draw(0, 0, WIDTH, HEIGHT)
+    else
+        video2:draw(0, 0, WIDTH, HEIGHT)
     end
-    -- When video is not playing, the screen remains empty
 end
+
+load_videos()
