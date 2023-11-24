@@ -9,8 +9,8 @@ device.gpio.monitor(config.pin_19)
 
 def handle_pin(pin, state):
     if state == 1:
-        print(f"pin {pin} touched")
-        node.send(f'/state/{pin}:1')
+        print("pin {} touched".format(pin))
+        node.send('/state/%d:1' % pin)
         time.sleep(20)  # Adjust the sleep time as needed
 
 def gpio_poll_loop():
