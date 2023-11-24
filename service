@@ -27,6 +27,7 @@ def handle_pin_17(state):
         seventeen_is_on = True
         print("pin 17 touched")
         node.send('/state:%d' % state)
+        time.sleep(20)
         seventeen_is_on = False
 
 def handle_pin_18(state):
@@ -35,6 +36,7 @@ def handle_pin_18(state):
         eighteen_is_on = True
         print("pin 18 touched")
         node.send('/state:%d' % state)
+        time.sleep(20)
         eighteen_is_on = False
 
 def handle_pin_19(state):
@@ -43,6 +45,7 @@ def handle_pin_19(state):
         nineteen_is_on = True
         print("pin 19 touched")
         node.send('/state:%d' % state)
+        time.sleep(20)
         nineteen_is_on = False
 
 def gpio_poll_loop():
