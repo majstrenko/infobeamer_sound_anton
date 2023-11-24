@@ -3,7 +3,7 @@ gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 util.no_globals()
 
 local video = resource.load_video{
-    file = "video1.mp4",
+    file = "1.mp4",
     looped = false,
     audio = true,
     paused = true
