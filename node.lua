@@ -19,6 +19,8 @@ util.data_mapper{
             current_video:start()
             video_playing = true
             wait( 5001 )
+        end
+        if state == '0' then
             current_video:stop()
             video_playing = false
         end
