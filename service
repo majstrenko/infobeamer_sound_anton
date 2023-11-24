@@ -3,19 +3,15 @@ from hosted import device, node, config, time, threading
 config.restart_on_update()
 
 device.gpio.monitor(config.pin_16)
-device.gpio.monitor(config.pin_17)
-device.gpio.monitor(config.pin_18)
-device.gpio.monitor(config.pin_19)
+# ... monitor other pins as needed
 
 def handle_pin(pin):
     print("Pin {} touched".format(pin))
-    node.send('/state/{}:1'.format(pin))  # Signal to start the video
-    time.sleep(20)  # Wait for a short period
-    node.send('/state/{}:0'.format(pin))  # Signal to reset the state
+    node.send('/state/{}:restart'.format(pin))  # Send a 'restart' signal
 
 def gpio_poll_loop():
     for pin, state in device.gpio.poll_forever():
-        if state == 1 and pin in [16, 17, 18, 19]:
+        if state == 1 and pin in [16, 17, 18, 19]:  # Adjust pin numbers as needed
             threading.Thread(target=handle_pin, args=(pin,)).start()
 
 # Start the GPIO polling loop in a separate thread
