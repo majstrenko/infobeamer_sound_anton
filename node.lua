@@ -20,7 +20,7 @@ util.data_mapper{
                 print("Starting video for pin 16")
             end
         end
-    end
+    end,
     ["state/16"] = function(state)
         if state == 'toggleoff' then
             if not video_playing then
@@ -29,7 +29,7 @@ util.data_mapper{
                 print("Starting video for pin 16")
             end
         end
-    end
+    end,
 }
 
 function node.render()
