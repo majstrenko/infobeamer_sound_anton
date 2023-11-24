@@ -10,7 +10,7 @@ device.gpio.monitor(config.pin_19)
 def handle_pin(pin):
     print("Pin {} touched".format(pin))
     node.send('/state/{}:1'.format(pin))  # Signal to start the video
-    time.sleep(1)  # Wait for a short period
+    time.sleep(20)  # Wait for a short period
     node.send('/state/{}:0'.format(pin))  # Signal to reset the state
 
 def gpio_poll_loop():
