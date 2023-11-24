@@ -3,10 +3,10 @@ gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 util.no_globals()
 
 local videos = {
-    [16] = resource.load_video{file = "video_for_pin_16.mp4", looped = false, audio = true, paused = true},
-    [17] = resource.load_video{file = "video_for_pin_17.mp4", looped = false, audio = true, paused = true},
-    [18] = resource.load_video{file = "video_for_pin_18.mp4", looped = false, audio = true, paused = true},
-    [19] = resource.load_video{file = "video_for_pin_19.mp4", looped = false, audio = true, paused = true},
+    [16] = resource.load_video{file = "1.mp4", looped = false, audio = true, paused = true},
+    [17] = resource.load_video{file = "2.mp4", looped = false, audio = true, paused = true},
+    [18] = resource.load_video{file = "3.mp4", looped = false, audio = true, paused = true},
+    [19] = resource.load_video{file = "4.mp4", looped = false, audio = true, paused = true},
 }
 
 local current_video = nil
