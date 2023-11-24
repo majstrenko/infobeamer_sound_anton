@@ -7,58 +7,16 @@ device.gpio.monitor(config.pin_17)
 device.gpio.monitor(config.pin_18)
 device.gpio.monitor(config.pin_19)
 
-sixteen_is_on = False
-seventeen_is_on = False
-eighteen_is_on = False
-nineteen_is_on = False
-
-def handle_pin_16(state):
-    global sixteen_is_on
-    if not sixteen_is_on:
-        sixteen_is_on = True
-        print("pin 16 touched")
-        node.send('/state:%d' % state)
-        time.sleep(20)
-        sixteen_is_on = False
-
-def handle_pin_17(state):
-    global seventeen_is_on
-    if not seventeen_is_on:
-        seventeen_is_on = True
-        print("pin 17 touched")
-        node.send('/state:%d' % state)
-        time.sleep(20)
-        seventeen_is_on = False
-
-def handle_pin_18(state):
-    global eighteen_is_on
-    if not eighteen_is_on:
-        eighteen_is_on = True
-        print("pin 18 touched")
-        node.send('/state:%d' % state)
-        time.sleep(20)
-        eighteen_is_on = False
-
-def handle_pin_19(state):
-    global nineteen_is_on
-    if not nineteen_is_on:
-        nineteen_is_on = True
-        print("pin 19 touched")
-        node.send('/state:%d' % state)
-        time.sleep(20)
-        nineteen_is_on = False
+def handle_pin(pin, state):
+    if state == 1:
+        print(f"pin {pin} touched")
+        node.send(f'/state/{pin}:1')
+        time.sleep(20)  # Adjust the sleep time as needed
 
 def gpio_poll_loop():
     for pin, state in device.gpio.poll_forever():
-        if state == 1:
-            if pin == 16:
-                threading.Thread(target=handle_pin_16, args=(state,)).start()
-            elif pin == 17:
-                threading.Thread(target=handle_pin_17, args=(state,)).start()
-            elif pin == 18:
-                threading.Thread(target=handle_pin_18, args=(state,)).start()
-            elif pin == 19:
-                threading.Thread(target=handle_pin_19, args=(state,)).start()
+        if pin in [16, 17, 18, 19]:
+            threading.Thread(target=handle_pin, args=(pin, state)).start()
 
 # Start the GPIO polling loop in a separate thread
 gpio_poll_thread = threading.Thread(target=gpio_poll_loop)
