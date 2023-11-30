@@ -12,9 +12,7 @@ def handle_pin(pin, state):
         print("pin {} touched".format(pin))
         node.send('/state/%d:1' % pin)
         #time.sleep(5)  # Adjust the sleep time as needed
-    elif state == 0:
-        print("pin {} touched state 0".format(pin))
-        node.send('/state/%d:0' % pin)
+        #node.send('/state/%d:0' % pin)
         #print("pin {} touched state 0".format(pin))
 
 def gpio_poll_loop():
