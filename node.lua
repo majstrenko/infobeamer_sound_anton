@@ -10,11 +10,11 @@ local function start_video(pin)
         if current_video then
                 current_video:dispose()
         end
-  local videos = {
+  local video = {
                 [16] = resource.load_video{file = "1.mp4"; looped = false; audio = true; paused = true},
                 [17] = resource.load_video{file = "1.mp4"; looped = false; audio = true; paused = true},
   }
-                current_video = videos[pin]
+                current_video = video[pin]
         current_video:start()
         video_playing = true
 end
