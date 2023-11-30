@@ -7,18 +7,18 @@ local video_playing = false
 
 
 local function start_video(pin)
-        if current_video then
-                current_video:dispose()
-        end
-        local video = {
+         local video = {
                 [16] = resource.load_video{file = "1.mp4"; looped = false; audio = true; paused = true},
                 [17] = resource.load_video{file = "2.mp4"; looped = false; audio = true; paused = true},
                 [18] = resource.load_video{file = "3.mp4"; looped = false; audio = true; paused = true},
   }
-        current_video = video[pin]
-        video_playing = true
-        current_video:start()
         
+        if current_video then
+                current_video:dispose()
+        end
+        current_video = video[pin]
+        current_video:start()
+        video_playing = true
 end
 
 
@@ -26,8 +26,8 @@ local function stop_video()
     if current_video then
         current_video:dispose()
     end
-        video_playing = false
         current_video = nil
+        video_playing = false
 end
 
 
