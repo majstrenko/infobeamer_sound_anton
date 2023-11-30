@@ -2,39 +2,33 @@ gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
 
 util.no_globals()
 
-local videos = {
-    [16] = {
-        resource.load_video{file = "1.mp4"; looped = false; audio = true; paused = true},
-        loaded = false,
-    },
-    [17] = {
-        resource.load_video{file = "1.mp4"; looped = false; audio = true; paused = true},
-        loaded = false,
-    },
-    [18] = {
-        resource.load_video{file = "1.mp4"; looped = false; audio = true; paused = true},
-        loaded = false,
-    },
-}
-
 local current_video = nil
+local video_playing = false
+
 
 local function start_video(pin)
+  local videos = {
+                [16] = resource.load_video{file = "1.mp4"; looped = false; audio = true; paused = true},
+                [17] = resource.load_video{file = "1.mp4"; looped = false; audio = true; paused = true},
+                [18] = resource.load_video{file = "1.mp4"; looped = false; audio = true; paused = true},
+  }
+        if current_video then
+                current_video:dispose()
+        end
+                current_video = videos[pin]
+        current_video:start()
+        video_playing = true
+end
+
+
+local function stop_video()
     if current_video then
         current_video:dispose()
-        current_video = nil
     end
-
-    if not videos[pin].loaded then
-        videos[pin][1]:start()
-        videos[pin].loaded = true
-    else
-        videos[pin][1]:seek(0)
-        videos[pin][1]:start()
-    end
-
-    current_video = videos[pin][1]
+                current_video = nil
+        video_playing = false 
 end
+
 
 util.data_mapper{
     ["state/16"] = function(state)
@@ -60,15 +54,15 @@ util.data_mapper{
 }
 
 function node.render()
-    gl.clear(0, 0, 0, 1) -- Black clear color
-
-    if current_video then
+    if video_playing and current_video then
         local video_state, w, h = current_video:state()
-        if video_state ~= "finished" then
-            current_video:draw(0, 0, WIDTH, HEIGHT)
+        if video_state == "finished" then
+            stop_video()
+            gl.clear(1, 0, 0, 1) -- red, default state
         else
-            current_video:dispose()
-            current_video = nil
+            current_video:draw(0, 0, WIDTH, HEIGHT)
         end
+    else
+        gl.clear(1, 0, 0, 1) -- red, default state
     end
 end
