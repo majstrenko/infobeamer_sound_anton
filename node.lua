@@ -59,7 +59,7 @@ util.data_mapper{
 function node.render()
     if video_playing and current_video then
         local video_state, w, h = current_video:state()
-        if video_state == "loaded" then
+        if video_state == "finished" then
             stop_video()
             gl.clear(1, 0, 0, 1) -- red, default state
         else
