@@ -20,7 +20,6 @@ local function start_video(pin)
                 current_video = videos[pin]
         current_video:start()
         video_playing = true
-        
 end
 
 
@@ -29,8 +28,7 @@ local function stop_video()
         current_video:dispose()
     end
                 current_video = nil
-        video_playing = false
-   
+        video_playing = false 
 end
 
 
@@ -63,6 +61,7 @@ function node.render()
         local video_state, w, h = current_video:state()
         if video_state == "loaded" then
             stop_video()
+            gl.clear(1, 0, 0, 1) -- red, default state
         else
             current_video:draw(0, 0, WIDTH, HEIGHT)
         end
