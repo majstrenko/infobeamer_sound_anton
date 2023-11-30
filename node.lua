@@ -22,6 +22,7 @@ local current_video = nil
 local function start_video(pin)
     if current_video then
         current_video:dispose()
+        current_video = nil
     end
 
     if not videos[pin].loaded then
@@ -33,13 +34,6 @@ local function start_video(pin)
     end
 
     current_video = videos[pin][1]
-end
-
-local function stop_video()
-    if current_video then
-        current_video:dispose()
-    end
-    current_video = nil
 end
 
 util.data_mapper{
@@ -66,14 +60,15 @@ util.data_mapper{
 }
 
 function node.render()
-    gl.clear(1, 0, 0, 1) -- red, default state
+    gl.clear(0, 0, 0, 1) -- Black clear color
 
     if current_video then
         local video_state, w, h = current_video:state()
         if video_state ~= "finished" then
             current_video:draw(0, 0, WIDTH, HEIGHT)
         else
-            stop_video()
+            current_video:dispose()
+            current_video = nil
         end
     end
 end
