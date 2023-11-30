@@ -23,7 +23,7 @@ end
 
 local function stop_video()
     if current_video then
-        current_video:dispose()
+        current_video = nil
     end
                 current_video = nil
         video_playing = false 
