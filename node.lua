@@ -16,7 +16,6 @@ local function start_video(pin)
         -- Logic to handle when a video is already playing (if needed)
         -- E.g., you can queue the next video or immediately switch to it
         current_video:dispose()
-        collectgarbage()  -- Explicit garbage collection
     end
 
     local video_file = video_files[pin]
@@ -38,7 +37,7 @@ end
 local function stop_video()
     if current_video then
         current_video:dispose()
-        collectgarbage()  -- Explicit garbage collection
+        
     end
     current_video = nil
     video_playing = false
