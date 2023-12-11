@@ -9,12 +9,12 @@ local video_files = {
     [17] = "2.mp4",
     [18] = "3.mp4",
     [19] = "4.mp4",
+    [20] = "3.mp4",
+    [21] = "4.mp4"
 }
 
 local function start_video(pin)
     if current_video and video_playing then
-        -- Logic to handle when a video is already playing (if needed)
-        -- E.g., you can queue the next video or immediately switch to it
         current_video:dispose()
     end
 
@@ -29,8 +29,6 @@ local function start_video(pin)
         current_video:start()
         video_playing = true
     else
-        -- Handle case when no video is associated with the pin
-        -- E.g., log an error or perform some default action
     end
 end
 
@@ -64,6 +62,16 @@ util.data_mapper{
             start_video(19)
         end
     end,
+    ["state/20"] = function(state) --pridané
+        if state == '1' then -- pridané
+            start_video(20) -- pridané
+        end -- pridané
+    end, -- pridané
+    ["state/21"] = function(state) -- pridané
+        if state == '1' then -- pridané
+            start_video(21) -- pridané
+        end -- pridané
+    end, -- pridané
 }
 
 function node.render()
