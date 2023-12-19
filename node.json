@@ -35,6 +35,20 @@
         "type": "integer",
         "default": 19
     }, 
+        {
+        "title": "MONITOR PIN 20",
+        "ui_width": 4,
+        "name": "pin_20",
+        "type": "integer",
+        "default": 20
+    }, 
+        {
+        "title": "MONITOR PIN 21",
+        "ui_width": 4,
+        "name": "pin_21",
+        "type": "integer",
+        "default": 21
+    }, 
      {
         "title": "Switch time",
         "ui_width": 4,
