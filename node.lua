@@ -9,8 +9,8 @@ local video_files = {
     [17] = "2.mp4",
     [18] = "3.mp4",
     [19] = "4.mp4",
-    [20] = "3.mp4",
-    [21] = "4.mp4"
+    [20] = "5.mp4",
+    [21] = "6.mp4"
 }
 
 local function start_video(pin)
