@@ -5,12 +5,12 @@ util.no_globals()
 local current_video = nil
 local video_playing = false
 local video_files = {
-    [16] = "1.mp4",
-    [17] = "2.mp4",
-    [18] = "3.mp4",
-    [19] = "4.mp4",
-    [20] = "5.mp4",
-    [21] = "6.mp4"
+    [16] = "3.mp4",
+    [17] = "1.mp4",
+    [18] = "5.mp4",
+    [19] = "6.mp4",
+    [20] = "4.mp4",
+    [21] = "2.mp4"
 }
 
 local function start_video(pin)
